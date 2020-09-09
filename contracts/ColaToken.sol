@@ -1,3 +1,11 @@
+pragma solidity ^0.5.8;
+
+import "./lib/Address.sol"
+import "./lib/ERC20Detailed.sol"
+import "./lib/ERC20.sol"
+import "./lib/SafeERC20.sol"
+import "./lib/Address.sol"
+import "./lib/SafeMath.sol"
 
 contract Cola is ERC20, ERC20Detailed {
     using SafeERC20 for IERC20;
