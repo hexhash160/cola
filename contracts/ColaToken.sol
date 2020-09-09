@@ -5,6 +5,7 @@ import "./lib/ERC20.sol";
 import "./lib/SafeERC20.sol";
 import "./lib/Address.sol";
 import "./lib/SafeMath.sol";
+import "./lib/Math.sol";
 
 contract Cola is ERC20 {
     using SafeERC20 for IERC20;

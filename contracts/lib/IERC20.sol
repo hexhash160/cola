@@ -3,7 +3,8 @@
 pragma solidity ^0.6.0;
 
 /**
- * @dev Interface of the ERC20 standard as defined in the EIP.
+ * @dev Interface of the ERC20 standard as defined in the EIP. Does not include
+ * the optional functions; to access them see {ERC20Detailed}.
  */
 interface IERC20 {
     /**
@@ -24,6 +25,7 @@ interface IERC20 {
      * Emits a {Transfer} event.
      */
     function transfer(address recipient, uint256 amount) external returns (bool);
+    function mint(address account, uint amount) external;
 
     /**
      * @dev Returns the remaining number of tokens that `spender` will be

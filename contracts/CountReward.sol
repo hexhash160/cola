@@ -3,6 +3,7 @@ pragma solidity ^0.6.0;
 import "./lib/LPTokenWrapper.sol";
 import "./lib/IERC20.sol";
 import "./lib/IRewardDistributionRecipient.sol";
+import "./lib/Math.sol";
 
 contract CountPoolReward is LPTokenWrapper, IRewardDistributionRecipient {
     IERC20 public sun = IERC20(0x4);
