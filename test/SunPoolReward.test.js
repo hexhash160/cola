@@ -1,15 +1,15 @@
 const {expectRevert, time} = require('@openzeppelin/test-helpers');
 const cola = artifacts.require('Cola');
 const poolReward = artifacts.require('SunPoolReward');
-const TokenSimpleERC20Contract = artifacts.require("DSToken")
+const TokenSimpleERC20Contract = artifacts.require("TestToken")
 const Decimal = 1000000000000000000
 
 
 contract('Reward', ([alice, bob, carol]) => {
     beforeEach(async () => {
         // time.increaseTo(1602510488);
-        this.testToken = await TokenSimpleERC20Contract.new("abc", "abc", BigInt(100000000 * Decimal).toString(), 18)
-        this.testToken.start();
+        this.testToken = await TokenSimpleERC20Contract.new()
+        // this.testToken.start();
         this.cola = await cola.new({from: alice});
         this.poolReward = await poolReward.new(this.testToken.address, this.cola.address, {from: alice});
         await this.cola.addMinter(alice);
@@ -39,7 +39,9 @@ contract('Reward', ([alice, bob, carol]) => {
     it('should not allow withraw more than what you have', async () => {
         await this.testToken.approve(this.poolReward.address, '100', {from: alice});
         await this.poolReward.stake('100', {from: alice});
-        // await this.poolReward.exit({from: alice})
+        await this.poolReward.withdraw('1', {from: alice});
+        assert.equal((await this.poolReward.balanceOf(alice)).valueOf(), '99');
+        await this.poolReward.exit({from: alice})
         // await expectRevert(
         //     this.poolReward.exit({from: alice}),
         //     'ERC20: burn amount exceeds balance',
