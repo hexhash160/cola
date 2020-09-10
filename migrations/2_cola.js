@@ -1,4 +1,5 @@
 const Cola = artifacts.require("Cola")
+const Reward = artifacts.require("CountPoolReward")
 
 
 let ownerAddr = '0x7d3221a00Dd94d5D2EAaC7e71234DC78d4C2A664';
