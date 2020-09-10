@@ -21,11 +21,11 @@ contract('Reward', ([alice, bob, carol]) => {
     });
 
     it('should not allow enter if not enough approve', async () => {
-        // this.poolReward.stake('100', {from: alice});
-        // await expectRevert(
-        //     this.poolReward.stake('100', {from: alice}),
-        //     'ds-token-insufficient-approval',
-        // );
+        this.poolReward.stake('100', {from: alice});
+        await expectRevert(
+            this.poolReward.stake('100', {from: alice}),
+            'ds-token-insufficient-approval',
+        );
         // await this.testToken.approve(this.poolReward.address, '50', {from: alice});
         // await expectRevert(
         //     this.poolReward.stake('100', {from: alice}),
@@ -36,7 +36,7 @@ contract('Reward', ([alice, bob, carol]) => {
         // assert.equal((await this.bar.balanceOf(alice)).valueOf(), '100');
     });
 
-    it('should not allow withraw more than what you have', async () => {
+    it('users pledge and withdraw proceeds', async () => {
         await this.testToken.approve(this.poolReward.address, '100', {from: alice});
         await this.poolReward.stake('100', {from: alice});
         await this.poolReward.withdraw('1', {from: alice});
