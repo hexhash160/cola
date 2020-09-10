@@ -21,13 +21,21 @@ contract Cola is ERC20 {
     mapping(address => bool) public minters;
 
     constructor () public {
-        _name = "cola.io";
-        _symbol = "cola";
+        _name = "ColaToken";
+        _symbol = "COLA";
         _decimals = 18;
         governance = msg.sender;
     }
 
-
+    function name() public view returns (string memory) {
+        return _name;
+    }
+    function symbol() public view returns (string memory) {
+        return _symbol;
+    }
+    function decimals() public view returns (uint8) {
+        return _decimals;
+    }
 
     function mint(address account, uint amount) public {
         require(minters[msg.sender], "!minter");
