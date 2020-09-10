@@ -1,4 +1,4 @@
-pragma solidity ^0.6.0;
+pragma solidity ^0.5.9;
 
 import "./lib/Address.sol";
 import "./lib/ERC20.sol";
