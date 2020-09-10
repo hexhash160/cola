@@ -1,5 +1,3 @@
-
-
 pragma solidity ^0.5.9;
 
 
@@ -12,7 +10,7 @@ contract LPTokenWrapper {
     using SafeMath for uint256;
     using SafeERC20 for IERC20;
 
-    IERC20 public y = IERC20(0x41a0a9d57ee9df8308bc29bcf881a569305260a0a5);
+    IERC20 public y = IERC20(0xc5be99A02C6857f9Eac67BbCE58DF5572498F40c);
 
     uint256 private _totalSupply;
     mapping(address => uint256) private _balances;

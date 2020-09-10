@@ -5,13 +5,13 @@ const TokenSimpleERC20Contract = artifacts.require("DSToken")
 const Decimal = 1000000000000000000
 
 
-
 contract('Reward', ([alice, bob, carol]) => {
     beforeEach(async () => {
         this.testToken = await TokenSimpleERC20Contract.new("abc", "abc", BigInt(100000000 * Decimal).toString(), 18)
         this.cola = await cola.new({from: alice});
-        this.poolReward = await poolReward.new({from: alice});
+        this.poolReward = await poolReward.new(this.testToken.address, this.cola.address, {from: alice});
         await this.cola.addMinter(alice);
+        await this.cola.addMinter(this.poolReward.address);//Allow reward contracts to issue tokens
 
         await this.cola.mint(alice, '100', {from: alice});
         await this.cola.mint(bob, '100', {from: alice});
