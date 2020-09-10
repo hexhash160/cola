@@ -10,6 +10,8 @@ import "../lib/SafeERC20.sol";
  * @dev Very simple ERC20 Token example, where all 10000 tokens are pre-assigned to the creator.
  */
 contract TestToken is ERC20, ERC20Detailed {
+    using SafeERC20 for IERC20;
+    using SafeMath for uint;
     // modify token name
     string public constant NAME = "ERC20ExampleToken";
     // modify token symbol
