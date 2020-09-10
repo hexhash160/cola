@@ -1,11 +1,11 @@
-//pragma solidity ^0.6.0;
-//
-//import "./lib/LPTokenWrapper.sol";
-//import "./lib/IERC20.sol";
-//import "./lib/IRewardDistributionRecipient.sol";
-//import "./lib/Math.sol";
-//
-//contract CountPoolReward is LPTokenWrapper, IRewardDistributionRecipient {
+pragma solidity ^0.5.9;
+
+import "./lib/LPTokenWrapper.sol";
+import "./lib/IERC20.sol";
+import "./lib/IRewardDistributionRecipient.sol";
+import "./lib/Math.sol";
+
+contract CountPoolReward is LPTokenWrapper, IRewardDistributionRecipient {
 //    IERC20 public sun = IERC20(0x4);
 //    uint256 public constant DURATION = 7 days;
 //
@@ -119,4 +119,4 @@
 //        periodFinish = block.timestamp.add(DURATION);
 //        emit RewardAdded(reward);
 //    }
-//}
+}

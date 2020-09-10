@@ -20,7 +20,9 @@ contract Cola is ERC20 {
     address public governance;
     mapping(address => bool) public minters;
 
-    constructor () public ERC20("cola.io","cola"){
+    constructor () public {
+        _name = "cola.io";
+        _symbol = "cola";
         _decimals = 18;
         governance = msg.sender;
     }
