@@ -15,14 +15,17 @@ contract('Reward', ([alice, bob, carol]) => {
         await this.cola.addMinter(alice);
         await this.cola.addMinter(this.poolReward.address);//Allow reward contracts to issue tokens
 
-        await this.cola.mint(alice, '100', {from: alice});
+        await this.cola.mint(alice, '200', {from: alice});
         await this.cola.mint(bob, '100', {from: alice});
         await this.cola.mint(carol, '100', {from: alice});
+
+        await this.testToken.transfer(alice, '200', {from: bob});
     });
 
     it('should not allow enter if not enough approve', async () => {
-        this.testToken.transfer(alice, '200');
-        assert.equal((await this.testToken.balanceOf(alice)).valueOf(), "200");
+        await this.testToken.approve(this.poolReward.address, '200', {from: alice});
+        this.poolReward.stake('100', {from: alice});
+        assert.equal((await this.testToken.balanceOf(alice)).valueOf(), "100");
         // this.poolReward.stake('100', {from: alice});
         // await expectRevert(
         //     this.poolReward.stake('100', {from: alice}),

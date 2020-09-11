@@ -1,7 +1,7 @@
 const {expectRevert} = require('@openzeppelin/test-helpers');
 const SushiToken = artifacts.require('Cola');
 let ownerAddr = '0x7d3221a00Dd94d5D2EAaC7e71234DC78d4C2A664';
-
+const TestToken = artifacts.require('TestToken');
 
 contract('ColaToken', ([alice, bob, carol]) => {
     beforeEach(async () => {
