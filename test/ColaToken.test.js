@@ -2,9 +2,11 @@ const {expectRevert} = require('@openzeppelin/test-helpers');
 const SushiToken = artifacts.require('Cola');
 let ownerAddr = '0x7d3221a00Dd94d5D2EAaC7e71234DC78d4C2A664';
 
+
 contract('ColaToken', ([alice, bob, carol]) => {
     beforeEach(async () => {
         this.cola = await SushiToken.new({from: alice});
+        this.testToken = await TestToken.new({from: alice});
     });
 
     it('should have correct name and symbol and decimal', async () => {
@@ -64,4 +66,5 @@ contract('ColaToken', ([alice, bob, carol]) => {
             'ERC20: transfer amount exceeds balance',
         );
     });
+
 });

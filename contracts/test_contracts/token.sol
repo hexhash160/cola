@@ -3,9 +3,9 @@ pragma solidity ^0.5.9;
 
 import "../lib/ERC20.sol";
 import "../lib/SafeERC20.sol";
+import "../lib/Address.sol";
 import "../lib/SafeMath.sol";
 import "../lib/Math.sol";
-
 /**
  * @title TanganyTestToken
  * @dev Very simple ERC20 Token example, where all 10000 tokens are pre-assigned to the creator.
@@ -63,7 +63,7 @@ contract TestToken is ERC20 {
         minters[_minter] = false;
     }
 
-    uint256 public constant INITIAL_SUPPLY = 10000 * (10 ** uint256(DECIMALS)); // 10000 tokens
+    uint256 public constant INITIAL_SUPPLY = 10000 * (10 ** uint(DECIMALS)); // 10000 tokens
 
 
 
