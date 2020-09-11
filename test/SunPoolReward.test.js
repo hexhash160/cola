@@ -23,6 +23,7 @@ contract('Reward', ([alice, bob, carol]) => {
         // this.testToken.start();
         this.cola = await cola.new({from: alice});
         this.poolReward = await poolReward.new(this.testToken.address, this.cola.address, this.startTime, {from: alice});
+        // this.poolReward.notifyRewardAmount(3500*Decimal);
         console.log("reward:" + this.poolReward.address)
         // await this.cola.addMinter(alice);
         await this.cola.addMinter(this.poolReward.address);//Allow reward contracts to issue tokens
@@ -44,9 +45,9 @@ contract('Reward', ([alice, bob, carol]) => {
         assert.equal((await this.testToken.balanceOf(alice)).valueOf(), "100");
         console.log("begin advanceToBlock");
 
-        // for (let i = 0; i < 20; ++i) {
-        //     await time.advanceBlock();
-        // }
+        for (let i = 0; i < 20; ++i) {
+            await time.advanceBlock();
+        }
         console.log("end advanceToBlock");
         let earned = await this.poolReward.earned(alice);
         let rewardPerToken = await this.poolReward.rewardPerToken();
@@ -59,7 +60,8 @@ contract('Reward', ([alice, bob, carol]) => {
         assert.ok(earned > 0, "alice get reward")
         // await this.poolReward.withdraw('100',{from: alice});
         const aliceBal = await this.cola.balanceOf(alice);
-        // await this.poolReward.getReward();
+        await this.poolReward.getReward();
+
         console.log("alice balance :" + aliceBal);
 
 
