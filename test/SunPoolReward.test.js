@@ -23,6 +23,7 @@ contract('Reward', ([alice, bob, carol]) => {
         // this.testToken.start();
         this.cola = await cola.new({from: alice});
         this.poolReward = await poolReward.new(this.testToken.address, this.cola.address, this.startTime, {from: alice});
+        console.log("reward:"+this.poolReward.address)
         await this.cola.addMinter(alice);
         await this.cola.addMinter(this.poolReward.address);//Allow reward contracts to issue tokens
 
@@ -30,11 +31,11 @@ contract('Reward', ([alice, bob, carol]) => {
         await this.cola.mint(bob, '100', {from: alice});
         await this.cola.mint(carol, '100', {from: alice});
         await this.testToken.transfer(alice, '200', {from: bob});
-        time.advanceBlock();
-
         this.endTime = this.startTime + duration.minutes(1);
         console.log("start time:" + this.startTime);
         console.log("end time:" + this.endTime);
+         this.currentBlock=await time.latestBlock();
+        console.log("current block:"+this.currentBlock)
     });
 
     it('stake and get reward', async () => {
@@ -43,14 +44,18 @@ contract('Reward', ([alice, bob, carol]) => {
         assert.equal((await this.testToken.balanceOf(alice)).valueOf(), "100");
         console.log("begin advanceToBlock");
 
-        for (let i = 0; i < 200; ++i) {
+        for (let i = 0; i < 2; ++i) {
             await time.advanceBlock();
         }
         console.log("end advanceToBlock");
         let earned = await this.poolReward.earned(alice);
         let rewardPerToken = await this.poolReward.rewardPerToken();
+        this.currentBlock=await time.latestBlock();
+        console.log("current block:"+this.currentBlock)
         console.log("rewardPerToken:" + rewardPerToken);
         console.log("reward:" + earned);
+        // console.log("periodFinish:" +  this.poolReward.periodFinish());
+        // console.log("lastUpdateTime:" + this.poolReward.lastUpdateTime());
         assert.ok(earned > 0, "alice get reward")
 
         // this.poolReward.stake('100', {from: alice});
