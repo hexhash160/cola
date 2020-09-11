@@ -24,11 +24,12 @@ contract SunPoolReward is LPTokenWrapper, IRewardDistributionRecipient {
     event RewardPaid(address indexed user, uint256 reward);
 
 
-    constructor (address lpToken, address rewardToken) public {
+    constructor (address lpToken, address rewardToken, uint256 start) public {
         //        require(lpToken.isContract(), "SafeERC20: call to non-contract");
         //        require(rewardToken.isContract(), "SafeERC20: call to non-contract");
         y = IERC20(lpToken);
         sun = IERC20(rewardToken);
+        starttime=start;
     }
 
     modifier updateReward(address account) {
