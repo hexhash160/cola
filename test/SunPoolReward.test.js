@@ -44,13 +44,13 @@ contract('Reward', ([alice, bob, carol]) => {
         assert.equal((await this.testToken.balanceOf(alice)).valueOf(), "100");
         console.log("begin advanceToBlock");
 
-        for (let i = 0; i < 20; ++i) {
-            await time.advanceBlock();
-        }
+        // for (let i = 0; i < 20; ++i) {
+        //     await time.advanceBlock();
+        // }
         console.log("end advanceToBlock");
         let earned = await this.poolReward.earned(alice);
         let rewardPerToken = await this.poolReward.rewardPerToken();
-        this.currentBlock = await time.latestBlock();
+        this.currentBlock = await web3.eth.getBlock("latest")
         console.log("current block:" + this.currentBlock)
         console.log("rewardPerToken:" + rewardPerToken);
         console.log("reward:" + earned);
@@ -58,9 +58,10 @@ contract('Reward', ([alice, bob, carol]) => {
         // console.log("lastUpdateTime:" + this.poolReward.lastUpdateTime());
         assert.ok(earned > 0, "alice get reward")
         // await this.poolReward.withdraw('100',{from: alice});
-        // const aliceBal = await this.cola.balanceOf(alice);
-        await this.poolReward.getReward();
+        const aliceBal = await this.cola.balanceOf(alice);
+        // await this.poolReward.getReward();
         console.log("alice balance :" + aliceBal);
+
 
         // this.poolReward.stake('100', {from: alice});
         // await expectRevert(

@@ -90,7 +90,7 @@ contract SunPoolReward is LPTokenWrapper, IRewardDistributionRecipient {
         uint256 reward = earned(msg.sender);
         if (reward > 0) {
             rewards[msg.sender] = 0;
-            sun.safeTransfer(msg.sender, reward);
+            sun.transfer(msg.sender, reward);
             emit RewardPaid(msg.sender, reward);
         }
     }
