@@ -26,6 +26,7 @@ contract('Reward', ([alice, bob, carol]) => {
         await this.testToken.approve(this.poolReward.address, '200', {from: alice});
         this.poolReward.stake('100', {from: alice});
         assert.equal((await this.testToken.balanceOf(alice)).valueOf(), "100");
+
         // this.poolReward.stake('100', {from: alice});
         // await expectRevert(
         //     this.poolReward.stake('100', {from: alice}),
