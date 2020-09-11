@@ -51,7 +51,7 @@ contract('Reward', ([alice, bob, carol]) => {
         let earned = await this.poolReward.earned(alice);
         let rewardPerToken = await this.poolReward.rewardPerToken();
         this.currentBlock = await web3.eth.getBlock("latest")
-        console.log("current block:" + this.currentBlock)
+        console.log("current block:" + this.currentBlock.timestamp)
         console.log("rewardPerToken:" + rewardPerToken);
         console.log("reward:" + earned);
         // console.log("periodFinish:" +  this.poolReward.periodFinish());
