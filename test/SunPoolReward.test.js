@@ -8,7 +8,7 @@ const Decimal = 1000000000000000000
 contract('Reward', ([alice, bob, carol]) => {
     beforeEach(async () => {
         // time.increaseTo(1602510488);
-        this.testToken = await TokenSimpleERC20Contract.new()
+        this.testToken = await TokenSimpleERC20Contract.new({from: bob})
         // this.testToken.start();
         this.cola = await cola.new({from: alice});
         this.poolReward = await poolReward.new(this.testToken.address, this.cola.address, {from: alice});
@@ -21,7 +21,7 @@ contract('Reward', ([alice, bob, carol]) => {
     });
 
     it('should not allow enter if not enough approve', async () => {
-        this.testToken.transfer(alice,200);
+        this.testToken.transfer(alice, '200');
         assert.equal((await this.testToken.balanceOf(alice)).valueOf(), "200");
         // this.poolReward.stake('100', {from: alice});
         // await expectRevert(
